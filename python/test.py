@@ -43,12 +43,10 @@ from wordcloud import WordCloud
 # My Path
 #====================================================================================================================#
 
-#__file__ = 'test.py'
-# codefile_directory=Path(__file__).absolute().parent
-# print(codefile_directory)
-# code_folder=str(codefile_directory)+"\python\\"
-
-code_folder="C:\Users\k_the\Dropbox\Youtube\python\\"
+__file__ = 'test.py'
+codefile_directory=Path(__file__).absolute().parent
+print(codefile_directory)
+code_folder=str(codefile_directory)+"\\"
 
 print(code_folder)
 
@@ -74,15 +72,7 @@ api_version="v3"
 #Get credentials and create an API client
 youtube = build('youtube', 'v3', developerKey=api_key)
 
-channel_ids = ['UCtYLUTtgS3k1Fg4y5tAhLbw', # Statquest
-               'UCCezIgC97PvUuR4_gbFUs5g', # Corey Schafer
-               'UCfzlCWGWYyIQ0aLC5w48gBQ', # Sentdex
-               'UCNU_lfiiWBdtULKOw6X0Dig', # Krish Naik
-               'UCzL_0nIe8B4-7ShhVPfJkgw', # DatascienceDoJo
-               'UCLLw7jmFsvfIVaUFsLs8mlQ', # Luke Barousse 
-               'UCiT9RITQ9PW6BhXK0y2jaeg', # Ken Jee
-               'UC7cs8q-gJRlGwj4A8OmCmXg', # Alex the analyst
-               'UC2UXDak6o7rBm23k3Vv5dww', # Tina Huang
+channel_ids = ['UC4EQHfzIbkL_Skit_iKt1aA', # penguinz0
               ]
 
 playlist_id = ['PLRD7N-Zrj2DOt_DFJg7IaJJCaLpsLJEwz']
@@ -142,8 +132,8 @@ video_df
 comments_df
 
 # Write video data to CSV file for future references
-video_df.to_csv('video_data_top10_channels.csv')
-comments_df.to_csv('comments_data_top10_channels.csv')
+video_df.to_csv('video_data_slapping.csv')
+comments_df.to_csv('comments_data_slapping.csv')
 
 #--------------------------------------------------------------------------------------------------------------------#
 # Preprocessing & Feature engineering
