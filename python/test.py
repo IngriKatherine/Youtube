@@ -1,4 +1,4 @@
-### Program with to get penguinz0 Youtube data
+### Program with to get Youtube data
 ### @ IQ
 
 #====================================================================================================================#
@@ -43,10 +43,13 @@ from wordcloud import WordCloud
 # My Path
 #====================================================================================================================#
 
-__file__ = 'test.py'
-codefile_directory=Path(__file__).absolute().parent
-print(codefile_directory)
-code_folder=str(codefile_directory)+"\\"
+#__file__ = 'test.py'
+# codefile_directory=Path(__file__).absolute().parent
+# print(codefile_directory)
+# code_folder=str(codefile_directory)+"\python\\"
+
+code_folder="C:\Users\k_the\Dropbox\Youtube\python\\"
+
 print(code_folder)
 
 #====================================================================================================================#
@@ -236,17 +239,3 @@ all_words_str = ' '.join(all_words)
 wordcloud = WordCloud(width = 2000, height = 1000, random_state=1, background_color='black', 
                       colormap='viridis', collocations=False).generate(all_words_str)
 plot_cloud(wordcloud)
-
-
-
-
-
-channel_ids = ['UC4EQHfzIbkL_Skit_iKt1aA']
-playlist_id = ['PLRD7N-Zrj2DOt_DFJg7IaJJCaLpsLJEwz']
-video_ids = ['']
-
-
-if __name__ == "__main__":
-    get_video_ids(youtube, playlist_id)
-    get_video_details(youtube, video_ids)
-    get_comments_in_videos(youtube, video_ids)
