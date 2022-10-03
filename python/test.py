@@ -43,10 +43,11 @@ from wordcloud import WordCloud
 # My Path
 #====================================================================================================================#
 
-__file__ = 'get.py'
+__file__ = 'test.py'
 codefile_directory=Path(__file__).absolute().parent
 print(codefile_directory)
 code_folder=str(codefile_directory)+"\\"
+print(code_folder)
 
 #====================================================================================================================#
 # Funtions
