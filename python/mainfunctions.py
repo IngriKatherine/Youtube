@@ -1,4 +1,4 @@
-### Program to get Youtube API data
+### Program with the functions to get Youtube API data
 ### @ IQ
 
 #py -m pip install --upgrade pip
@@ -28,68 +28,18 @@ import os
 from pathlib import Path
 from sys import api_version
 
-#Timer
-from timeit import default_timer as timer
-from dateutil import parser
-import isodate
-from datetime import datetime, timedelta
-
 # Google API
 import google_auth_oauthlib.flow
 import googleapiclient.discovery
 import googleapiclient.errors
-from googleapiclient.errors import HttpError
 from googleapiclient.discovery import build
 
-# Data visualization libraries
-import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker
-import seaborn as sns
-sns.set(style="darkgrid", color_codes=True)
-
-# NLP libraries
-import nltk
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
-nltk.download('stopwords')
-nltk.download('punkt')
-from wordcloud import WordCloud
-
-#====================================================================================================================#
-# My Path
-#====================================================================================================================#
-
-__file__ = 'get.py'
-codefile_directory=Path(__file__).absolute().parent
-print(codefile_directory)
-
-#====================================================================================================================#
-# Parameters
-#====================================================================================================================#
-
-api_key = 'AIzaSyDt29H6_4ZRFulkdEbeb-FC5tO3Hoh3zHQ'
-api_service_name="youtube"
-api_version="v3"
-
-#Get credentials and create an API client
-youtube = googleapiclient
-
-channel_ids = ['UCtYLUTtgS3k1Fg4y5tAhLbw', # Statquest
-               'UCCezIgC97PvUuR4_gbFUs5g', # Corey Schafer
-               'UCfzlCWGWYyIQ0aLC5w48gBQ', # Sentdex
-               'UCNU_lfiiWBdtULKOw6X0Dig', # Krish Naik
-               'UCzL_0nIe8B4-7ShhVPfJkgw', # DatascienceDoJo
-               'UCLLw7jmFsvfIVaUFsLs8mlQ', # Luke Barousse 
-               'UCiT9RITQ9PW6BhXK0y2jaeg', # Ken Jee
-               'UC7cs8q-gJRlGwj4A8OmCmXg', # Alex the analyst
-               'UC2UXDak6o7rBm23k3Vv5dww', # Tina Huang
-              ]
-
-youtube = build('youtube', 'v3', developerKey=api_key)
-    
 #====================================================================================================================#
 # Functions
 #====================================================================================================================#
+
+#--------------------------------------------------------------------------------------------------------------------#
+
 def get_channel_stats(youtube, channel_ids):
     """
     Get channel statistics: title, subscriber count, view count, video count, upload playlist
@@ -117,6 +67,8 @@ def get_channel_stats(youtube, channel_ids):
         all_data.append(data)
     
     return pd.DataFrame(all_data)
+
+#--------------------------------------------------------------------------------------------------------------------#
 
 def get_video_ids(youtube, playlist_id):
     """
@@ -163,6 +115,8 @@ def get_video_ids(youtube, playlist_id):
         
     return video_ids
 
+#--------------------------------------------------------------------------------------------------------------------#
+
 def get_video_details(youtube, video_ids):
     """
     Get video statistics of all videos with given IDs
@@ -204,6 +158,8 @@ def get_video_details(youtube, video_ids):
 
             all_video_info.append(video_info)
 
+#--------------------------------------------------------------------------------------------------------------------#
+
 def get_comments_in_videos(youtube, video_ids):
     """
     Get top level comments as text from all videos with given IDs (only the first 10 comments due to quote limit of Youtube API)
@@ -237,37 +193,4 @@ def get_comments_in_videos(youtube, video_ids):
         
     return pd.DataFrame(all_comments)     
 
-
-
-
-scopes = ["https://www.googleapis.com/auth/youtube.readonly"]
-
-def main():
-    # Disable OAuthlib's HTTPS verification when running locally.
-    # *DO NOT* leave this option enabled in production.
-    os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
-
-    api_service_name = "youtube"
-    api_version = "v3"
-    client_secrets_file = "YOUR_CLIENT_SECRET_FILE.json"
-
-    # Get credentials and create an API client
-    flow = google_auth_oauthlib.flow.InstalledAppFlow.from_client_secrets_file(
-        client_secrets_file, scopes)
-    credentials = flow.run_console()
-    youtube = googleapiclient.discovery.build(
-        api_service_name, api_version, credentials=credentials)
-
-    request = youtube.channels().list(
-        part="snippet,contentDetails,statistics",
-        id="UC_x5XG1OV2P6uZZ5FSM9Ttw"
-    )
-    response = request.execute()
-
-    print(response)
-
-if __name__ == "__main__":
-    main()
-#--------------------------------------------------------------------------------------------------------------------#
-# PART A. Functions that download the Comtrade Bulk data 
 #--------------------------------------------------------------------------------------------------------------------#
